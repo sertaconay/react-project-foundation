@@ -4,6 +4,7 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackTemplate = require('html-webpack-template');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const DotEnv = require('dotenv-webpack');
 
 
 module.exports = (env, argv) => {
@@ -46,6 +47,11 @@ module.exports = (env, argv) => {
     },
     plugins: [
       new ForkTsCheckerWebpackPlugin(),
+      new DotEnv({
+        path: `./env.${mode === 'production'} ? 'prod' : 'dev'`,
+        safe: true,
+        systemvars: true,
+      }),
       new webpack.EnvironmentPlugin({
         BABEL_ENV: mode,
       }),
