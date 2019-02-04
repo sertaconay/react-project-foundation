@@ -65,3 +65,6 @@ typings/
 
 # vscode
 .vscode
+
+# sample data
+src/sampleData.js
