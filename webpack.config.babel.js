@@ -48,7 +48,7 @@ module.exports = (env, argv) => {
     plugins: [
       new ForkTsCheckerWebpackPlugin(),
       new DotEnv({
-        path: `./env.${mode === 'production'} ? 'prod' : 'dev'`,
+          path: `./env.${mode === 'production' ? 'prod' : 'dev'}`,
         safe: true,
         systemvars: true,
       }),
