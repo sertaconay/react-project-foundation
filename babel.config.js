@@ -15,6 +15,7 @@ module.exports = (api) => {
       ],
       '@babel/typescript',
       '@babel/preset-react',
+      ['@emotion/babel-preset-css-prop', { sourceMap: true, autoLabel: true }],
     ],
     plugins: [
       [
@@ -26,8 +27,8 @@ module.exports = (api) => {
           },
         },
       ],
-      ['import', { libraryName: 'antd', libraryDirectory: 'lib', style: true }],
-      ['emotion', { sourceMap: true, autoLabel: true }],
+      ['import', { libraryName: 'antd', libraryDirectory: 'lib', style: true }, 'antd'],
+      ['import', { libraryName: 'ant-design-pro', libraryDirectory: 'lib', style: true, camel2DashComponentName: false }, 'ant-design-pro'],
       '@babel/plugin-proposal-class-properties',
       '@babel/proposal-object-rest-spread',
       'react-hot-loader/babel',

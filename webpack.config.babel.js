@@ -8,7 +8,6 @@ const DotEnv = require('dotenv-webpack');
 
 
 module.exports = (env, argv) => {
-  console.log({ env, argv });
   const { mode } = argv;
 
   const resolvePath = src => path.join(__dirname, src);
@@ -33,6 +32,9 @@ module.exports = (env, argv) => {
     resolve: {
       modules: [paths.nodeModules, paths.src],
       extensions: ['.js', '.json', '.ts', '.tsx', '.jsx', '.svg', '.jpg', '.png'],
+      alias: {
+        'react-dom': '@hot-loader/react-dom',
+      },
     },
     devServer: {
       stats: 'errors-only',
@@ -48,9 +50,9 @@ module.exports = (env, argv) => {
     plugins: [
       new ForkTsCheckerWebpackPlugin(),
       new DotEnv({
-          path: `./env.${mode === 'production' ? 'prod' : 'dev'}`,
-        safe: true,
-        systemvars: true,
+        path: `./.env.${mode === 'production' ? 'prod' : 'dev'}`,
+        // safe: true,
+        // systemvars: true,
       }),
       new webpack.EnvironmentPlugin({
         BABEL_ENV: mode,
@@ -79,6 +81,10 @@ module.exports = (env, argv) => {
     module: {
       rules: [
         {
+          test: /\.(jp|pn|sv)g$/,
+          use: 'file-loader',
+        },
+        {
           test: /\.css$/,
           use: [
             {
@@ -106,12 +112,28 @@ module.exports = (env, argv) => {
           enforce: 'pre',
           test: /\.(js|ts)x?$/,
           include: paths.src,
-          use: ['eslint-loader', 'stylelint-custom-processor-loader'],
+          use: [
+            {
+              loader: 'eslint-loader',
+              options: {
+                parser: '@typescript-eslint/parser',
+              },
+            },
+            {
+              loader: 'tslint-loader',
+              options: {
+                transpileOnly: true,
+              },
+            },
+            'stylelint-custom-processor-loader',
+          ],
+          // use: ['tslint-loader', 'stylelint-custom-processor-loader'],
         },
         {
           test: /\.(ts|js)x?$/,
           include: paths.src,
-          loader: 'babel-loader',
+          // loader: 'babel-loader',
+          use: ['babel-loader', 'react-hot-loader/webpack', 'ts-loader'],
         },
       ],
     },

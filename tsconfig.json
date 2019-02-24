@@ -7,17 +7,14 @@
     "esModuleInterop": true,
     "noUnusedLocals": true,
     "noImplicitAny": true,
-    "declarationDir": "dist/types",
+    "declarationDir": "types/generated",
     "skipLibCheck": true,
     "declaration": true,
     "strict": true,
-    "allowJs": true,
     "forceConsistentCasingInFileNames": true,
     "module": "ESNext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
     "jsx": "react",
     "target": "es5",
     "baseUrl": "./src",
@@ -25,13 +22,16 @@
       "dom",
       "dom.iterable",
       "esnext"
-    ]
+    ],
+    "typeRoots": [
+      "./types", "./node_modules/@types"]
   },
   "include": [
     "src/**/*"
   ],
   "exclude": [
     "node_modules",
-    "public"
+    "public",
+    "src/helpers/server.js"
   ]
 }

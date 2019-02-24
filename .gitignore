@@ -56,6 +56,8 @@ typings/
 
 # dotenv environment variables file
 .env
+.env.dev
+.env.prod
 
 # next.js build output
 .next
@@ -67,4 +69,7 @@ typings/
 .vscode
 
 # sample data
-src/sampleData.js
+/src/helpers/data
+
+#mac
+.DS_Store
