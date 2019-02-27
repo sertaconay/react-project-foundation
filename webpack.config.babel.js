@@ -63,6 +63,9 @@ module.exports = (env, argv) => {
           { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1' },
           { content: 'ie=edge', 'http-equiv': 'x-ua-compatible' },
         ],
+        links: [
+          'https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&amp;subset=latin-ext',
+        ],
         prefetch: ['**/*.*'],
         preload: ['**/*.*'],
         template: HtmlWebpackTemplate,
